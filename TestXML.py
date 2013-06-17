@@ -30,7 +30,7 @@ class TestXML (unittest.TestCase) :
     # ----
 
     #def test_read (self) :
-     #   r = StringIO.StringIO("1 10\n")
+     #   r = StringIO.StringIO("<THU><Team><ACRush></ACRush><Jelly></Jelly><Cooly></Cooly></Team><JiaJia><Team><Ahyangyi></Ahyangyi><Dragon></Dragon><Cooly><Amber></Amber></Cooly></Team></JiaJia></THU>\n<Team><Cooly></Cooly></Team>\n")
       #  a = [0, 0]
        # b = collatz_read(r, a)
         #self.assert_(b    == True)
