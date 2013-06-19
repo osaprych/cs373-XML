@@ -15,10 +15,10 @@ To document the program
 
 import sys
 
-#from XML import xml_solve
+from XML import xml_read
 
 # ----
 # main
 # ----
 
-#xml_solve(sys.stdin, sys.stdout)
+xml_solve(sys.stdin, sys.stdout)
