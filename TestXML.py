@@ -18,7 +18,7 @@ To test the program:
 import StringIO
 import unittest
 
-#from Collatz import collatz_read, collatz_eval, collatz_print, collatz_solve, collatz_cycle, cache
+from XML import XML_read, XML_solve, ET
 
 # -----------
 # TestXML
@@ -29,12 +29,12 @@ class TestXML (unittest.TestCase) :
     # read
     # ----
 
-    #def test_read (self) :
-     #   r = StringIO.StringIO("<THU><Team><ACRush></ACRush><Jelly></Jelly><Cooly></Cooly></Team><JiaJia><Team><Ahyangyi></Ahyangyi><Dragon></Dragon><Cooly><Amber></Amber></Cooly></Team></JiaJia></THU>\n<Team><Cooly></Cooly></Team>\n")
-      #  a = [0, 0]
-       # b = collatz_read(r, a)
-        #self.assert_(b    == True)
-        #self.assert_(a[0] ==  1)
+    def test_read (self) :
+	r = StringIO.StringIO("<THU><Team><ACRush></ACRush><Jelly></Jelly><Cooly></Cooly></Team><JiaJia><Team><Ahyangyi></Ahyangyi><Dragon></Dragon><Cooly><Amber></Amber></Cooly></Team></JiaJia></THU>")
+	test_tree = ET.parse(r) 
+	b = xml_read(r, test_tree)
+        self.assert_(b    == True)
+        self.assert_(test_tree ==  True)
         #self.assert_(a[1] == 10)
         
         
