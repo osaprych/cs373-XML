@@ -21,4 +21,4 @@ from XML import xml_read
 # main
 # ----
 
-xml_solve(sys.stdin, sys.stdout)
+xml_read_file(sys.stdin, sys.stdout)
