@@ -18,7 +18,7 @@ To test the program:
 import StringIO
 import unittest
 
-from XML import xml_read_file, ET
+from XML import xml_read_file, ET, xml_split_roots
 
 # -----------
 # TestXML
@@ -26,7 +26,7 @@ from XML import xml_read_file, ET
 
 class TestXML (unittest.TestCase) :
     # ----
-    # read_file
+    # xml_read_file
     # ----
 
 	def test_read_file(self):
@@ -34,19 +34,19 @@ class TestXML (unittest.TestCase) :
 		a = 0
 		b = xml_read_file(r, a)
 		#Found length by printing from XML.py
-		self.assert_(len(b) == 246)
-
-	"""
-    def test_read (self) :
-        #r = "RunXML.in"
-        #test_tree = ET.parse(r)
-        b = xml_read()
-        self.assert_(b.tag    == "THU")
-
-        for child in b:
-            print child.tag, child.attrib
-	"""        
+		self.assert_(len(b) == 246)        
     
+	#----
+	# xml_split_roots
+	#----
+	
+	def test_split_roots(self):
+		r = "RunXML.in"
+		a = 0
+		b = xml_read_file(r, a)
+		v = xml_split_roots(b)
+		self.assert_(v[0].tag == "THU")
+		self.assert_(v[1].tag == "Team")
     
     
         
