@@ -18,7 +18,7 @@ To test the program:
 import StringIO
 import unittest
 
-from XML import xml_read_file, ET, xml_split_roots
+from XML import xml_read_file, xml_split_roots, xml_data_query
 
 # -----------
 # TestXML

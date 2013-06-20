@@ -6,7 +6,32 @@ import xml.etree.ElementTree as ET
 #xml_tree = ElementTree()
 
 #----------
-# xml_read
+# xml_data_query
+#----------
+
+def xml_data_query(xml_list) :
+	data = xml_list[0] # XML documents with exactly one root element 
+	query = xml_list[1] # XML documents as querying pattern with exactly one root element
+	"""	
+	print "\ndata: "
+	print data
+	print "\nquery: "
+	print query
+	"""
+	# make list of query elements
+	query_list = [query]
+	for query_child in query :
+		query_list.append(query_child)
+
+	print query_list
+
+	print query[0]
+	print "\nbranch elements"
+	for branch_element in data.iter(query[0].tag) :
+		print branch_element
+
+#----------
+# xml_split_roots
 #----------
 
 def xml_split_roots(s):
@@ -15,24 +40,15 @@ def xml_split_roots(s):
 		
 	#Create list of children
 	xml_children_list = []
+	
 	for xml_child in root_from_string :
-		print "child is "
+		#print "child is "
         	#print root_from_string
-		print xml_child
-		xml_children_list += xml_child
+		#print xml_child
+		xml_children_list.append(xml_child)
 	
-	print xml_children_list
-		
-	
-	
-	#ET.ElementTree(root_from_string).write(xml_temp.in)
-	#xml_tree = ET.fromstring(s)
-	#xml_root = xml_tree.getroot()
-	
-	#print xml_root
-
-	#return xml_root
-
+	xml_data_query(xml_children_list)
+	return xml_children_list
 
 #----------
 # xml_read_file
@@ -41,8 +57,8 @@ def xml_split_roots(s):
 #def xml_read_singleXMLandQuery
 def xml_read_file(r, a) :
 	#Open file
-	#xml_file = open('RunXML.in')
-	xml_file = open(r)
+	xml_file = open('RunXML.in')
+	#xml_file = open(r)
 	#Read entire file
 	xml_file_string = xml_file.read()
 	#Concatenation of void xml tags around entire input
