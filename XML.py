@@ -1,21 +1,38 @@
 #!/usr/bin/env python
 import xml.etree.ElementTree as ET
+#from xml.etree.ElementTree import ElementTree
 
 # global Element_Tree
-xml_tree = 0
+#xml_tree = ElementTree()
 
 #----------
 # xml_read
 #----------
 
-def xml_read ():
-#def xml_read(s):
-	# need to check if it's an empty file or an empty tree
-	xml_tree = ET.parse('RunXML.in')
+def xml_split_roots(s):
+	#Get root element of newly created tree
+	root_from_string = ET.fromstring(s)
+		
+	#Create list of children
+	xml_children_list = []
+	for xml_child in root_from_string :
+		print "child is "
+        	#print root_from_string
+		print xml_child
+		xml_children_list += xml_child
+	
+	print xml_children_list
+		
+	
+	
+	#ET.ElementTree(root_from_string).write(xml_temp.in)
 	#xml_tree = ET.fromstring(s)
-	xml_root = xml_tree.getroot()
-	assert xml_root.tag == 'THU'#print xml_root.tag
-	return xml_root
+	#xml_root = xml_tree.getroot()
+	
+	#print xml_root
+
+	#return xml_root
+
 
 #----------
 # xml_read_file
@@ -23,17 +40,16 @@ def xml_read ():
 
 #def xml_read_singleXMLandQuery
 def xml_read_file(r, a) :
-	#read lines from in file
-	xml_strings = []
-	while (r.readline() != "") :
-		xml_strings += r.readline()
-	#Assumes query is a single line
-	xml_query = xml_strings[-1]
-	
-	for string in range(0, len(xml_strings)-1) :
-		tree_string += string 
+	#Open file
+	#xml_file = open('RunXML.in')
+	xml_file = open(r)
+	#Read entire file
+	xml_file_string = xml_file.read()
+	#Concatenation of void xml tags around entire input
+	xml_file_string = "<xml>" + xml_file_string + "</xml>"
+	print xml_file_string
+	assert len(xml_file_string) > 0
 
-	#xml_read(tree_string)
-	
-	
-	#tree.fromstring for separate xml trees
+	xml_split_roots(xml_file_string)
+
+	return xml_file_string

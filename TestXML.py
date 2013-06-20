@@ -18,7 +18,7 @@ To test the program:
 import StringIO
 import unittest
 
-from XML import xml_read, ET
+from XML import xml_read_file, ET
 
 # -----------
 # TestXML
@@ -26,9 +26,17 @@ from XML import xml_read, ET
 
 class TestXML (unittest.TestCase) :
     # ----
-    # read
+    # read_file
     # ----
 
+	def test_read_file(self):
+		r = "RunXML.in"
+		a = 0
+		b = xml_read_file(r, a)
+		#Found length by printing from XML.py
+		self.assert_(len(b) == 246)
+
+	"""
     def test_read (self) :
         #r = "RunXML.in"
         #test_tree = ET.parse(r)
@@ -37,7 +45,7 @@ class TestXML (unittest.TestCase) :
 
         for child in b:
             print child.tag, child.attrib
-        
+	"""        
     
     
     
