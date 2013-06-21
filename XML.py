@@ -4,6 +4,31 @@ import xml.etree.ElementTree as ET
 
 # global Element_Tree
 #xml_tree = ElementTree()
+counter = [1]	
+
+#----------
+# xml_data_query
+#----------
+
+def depth_search(parent) :
+	for child in parent :
+
+		child.set(child.tag, counter[0])
+		counter[0] += 1
+		#print parent
+		print child.attrib
+		depth_search(child)
+
+
+#----------
+# xml_get_subelements
+#----------
+
+def xml_get_subelements(d, q) :
+	d.set(d.tag, counter[0])
+	counter[0] += 1
+	depth_search(d)
+	# parsing subtree
 
 #----------
 # xml_data_query
@@ -12,19 +37,20 @@ import xml.etree.ElementTree as ET
 def xml_data_query(xml_list) :
 	data = xml_list[0] # XML documents with exactly one root element 
 	query = xml_list[1] # XML documents as querying pattern with exactly one root element
-	"""	
-	print "\ndata: "
-	print data
-	print "\nquery: "
-	print query
+	xml_get_subelements(data, query)	
 	"""
+	print query.tag
+	#query.set(query.tag, 2)
+	print query.attrib
+	print query.items()
+
 	# For each element of the query (root and children)
-	
-	for branch_element in data.iter(query.tag) :
-		print "query = "
-		print query
+	counter = 1
+	for branch_element in data :
+		branch_element.set(branch_element.tag, counter)
 		print "branch_element === "
-		print branch_element
+		print branch_element.attrib
+		counter += 1
 
 	for query_child in query :
 		print "query_child = "
@@ -32,6 +58,7 @@ def xml_data_query(xml_list) :
 		for branch_element in data.iter(query_child.tag) :
 			print "branch_element === "			
 			print branch_element
+	"""
 
 #----------
 # xml_split_roots
