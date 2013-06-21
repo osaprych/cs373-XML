@@ -18,17 +18,20 @@ def xml_data_query(xml_list) :
 	print "\nquery: "
 	print query
 	"""
-	# make list of query elements
-	query_list = [query]
-	for query_child in query :
-		query_list.append(query_child)
-
-	print query_list
-
-	print query[0]
-	print "\nbranch elements"
-	for branch_element in data.iter(query[0].tag) :
+	# For each element of the query (root and children)
+	
+	for branch_element in data.iter(query.tag) :
+		print "query = "
+		print query
+		print "branch_element === "
 		print branch_element
+
+	for query_child in query :
+		print "query_child = "
+		print query_child
+		for branch_element in data.iter(query_child.tag) :
+			print "branch_element === "			
+			print branch_element
 
 #----------
 # xml_split_roots
@@ -63,7 +66,7 @@ def xml_read_file(r, a) :
 	xml_file_string = xml_file.read()
 	#Concatenation of void xml tags around entire input
 	xml_file_string = "<xml>" + xml_file_string + "</xml>"
-	print xml_file_string
+	#print xml_file_string
 	assert len(xml_file_string) > 0
 
 	xml_split_roots(xml_file_string)
