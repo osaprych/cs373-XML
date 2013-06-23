@@ -47,7 +47,35 @@ class TestXML (unittest.TestCase) :
 		v = xml_split_roots(b)
 		self.assert_(v[0].tag == "THU")
 		self.assert_(v[1].tag == "Team")
-    
+
+	#-----
+	# xml_data_query
+	#-----
+
+	def test_data_query (self):
+		r = "RunXML.in"
+                a = 0
+                b = xml_read_file(r, a)
+		vv = xml_split_roots(b)
+               	v = xml_data_query(vv)
+		self.assert_(v.tag == "Team")
+
+	#----
+	# depth_search (recursive function)
+	#----
+	
+	"""
+
+	def test_depth_search (self) :
+		r = "RunXML.in"
+                a = 0
+                b = xml_read_file(r, a)
+                vv = xml_split_roots(b)
+		test_data = vv[0]
+		test_query = vv[1]
+		depth_search(test_data, test_query)
+	"""	
+  
     
         
         
