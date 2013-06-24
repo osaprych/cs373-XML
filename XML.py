@@ -14,42 +14,68 @@ query_counter = [0]
 #extract first element of list
 
 #sort list
+"""
+except EndOfQuery :
+	query_counter[0] += 1
+	print "query_counter"
+	print query_counter
+"""
+#-----
+# query_search (recursive)
+#-----
 
+def query_search(data_root, query) :
+	for data_child in data_root :
+		if data_child.tag == query.tag :
+			#recurse down tree to find next query el
+			print "found query: ",
+			print query
+			print "at data element ",
+			print data_child
+			print "----"
+			query_counter[0] += 1
+			print "COUNTER ",
+			print query_counter[0]
+				
+			print "calling with query_check() ",
+			print data_child,
+			print query
+			query_check(data_child, query)
+		else :
+			#look for query in grandchildren
+			"""
+			print "calling with query_search() ",
+			print data_child,
+			print query
+			"""
+			query_search(data_child, query)
+	return True
 
 #-----
 # query_check (recursive)
 #-----
 
-def query_check(data_root, query_root):
+def query_check(data, query_root):
 	#Loop over query branch elements
+	#print "\n\nMade it to the query_check!!!\n"
+	#print "called with query_check() "
+	#print data,
+	#print list(query_root)
 	for query_child in query_root :
-		print "searching new branch for :"
+		"""
+		print "query_check() searching new branch for :",
 		print query_child
 		print ""
+		"""
+		query_search(data, query_child)
 		#if there are no query_children under a root
 			#query_counter[0] += 1
-
+		#if query_child == None :
+		#	raise EndOfQuery
 		#Loop over data branch looking for remainder of query
-		for data_child in data_root :
-			if data_child.tag == query_child.tag :
-				#recurse down tree to find next query el
-				print "found query: "
-				print query_child
-				#print "at data element"
-				#print data_child
-				print "----"
-				query_counter[0] += 1
-				print "query_counter"
-				print query_counter
-				print "calling recurse with"
-				print data_child
-				print query_child
-				query_check(data_child, query_child)
-			else :
-				#look for query in grandchildren
-				query_check(data_child, query_root)
+	return True
 			
-				
+
 
 #----------
 # depth_search (recursive)
@@ -70,10 +96,12 @@ def depth_search(parent, query_root) :
 		#Check for beginning of query pattern
 		#*****Query Kickoff*****
 		if (child.tag == query_root.tag) :
-			print "Kicked off query_check!!!!!!!!!!!"
-			query_check(child, query_root)		
+			#print "Kicked off query_check!!!!!!!!!!!"
+			query_counter[0] += 1
+			query_check(child, query_root)
 
 		depth_search (child, query_root)
+	return True
 
 
 #----------
@@ -93,7 +121,8 @@ def xml_get_subelements(d, q) :
 def xml_data_query(xml_list) :
 	data = xml_list[0] # XML documents with exactly one root element 
 	query = xml_list[1] # XML documents as querying pattern with exactly one root element
-	
+	print "PRINTING QUERY"
+	print list(query)
 
 	xml_get_subelements(data, query)
 
@@ -127,7 +156,7 @@ def xml_split_roots(s):
 
 def xml_read_file(r, a) :
 	#Open file
-	xml_file = open('RunXML.in')
+	xml_file = open('RunXML_altered2.in')
 	#xml_file = open(r)
 	#Read entire file
 	xml_file_string = xml_file.read()

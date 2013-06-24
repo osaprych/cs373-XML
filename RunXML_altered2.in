@@ -3,6 +3,7 @@
 		<ACRush></ACRush>
 		<Jelly></Jelly>
 		<Cooly></Cooly>
+		<Hello></Hello>
 	</Team>
 	<JiaJia>
 		<Team>
@@ -13,6 +14,7 @@
 	</JiaJia>
 </THU>
 <Team>
+	<Dragon></Dragon>
 	<Cooly>
 		<Amber></Amber>
 	</Cooly>
