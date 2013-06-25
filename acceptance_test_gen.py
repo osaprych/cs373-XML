@@ -11,8 +11,29 @@ import random
 # main
 # ----
 
+
+
+def gen_rand_data (size_data, query) :
+	data = ""
+	while size_data :
+		data_and_dataclose = gen_rand_pair()
+		if random.randint(1, 100) % 2 == 0 :
+			data = data_and_dataclose[0] + query + data_and_dataclose[1]
+		elif random.randint(1, 100) % 2 == 0 :
+			data = data + data_and_dataclose[0] + data_and_dataclose[1]
+		else :
+			data = query + data_and_dataclose[0] + data_and_dataclose[1]
+		size_data -= 1
+	data_and_dataclose = gen_rand_pair()
+	data = data_and_dataclose[0] + data + data_and_dataclose[1]
+	print "random data generated",
+	print data
+	print ""
+	return data
+
+
 def gen_rand_query(size) :
-	query = ""
+	query = ""	
 	while size :
 		i_and_j = gen_rand_pair()
 		if random.randint(1, 100) % 2 == 0 :
@@ -22,7 +43,9 @@ def gen_rand_query(size) :
 		size -= 1
 	i_and_j = gen_rand_pair()
 	query = i_and_j[0] + query + i_and_j[1]
+	print "random query generated",
 	print query
+	print ""
 	return query
 	
 def gen_rand_pair() :
@@ -46,9 +69,14 @@ def get_rand_tag() :
 	return random_tag
 
 def acceptance() :
-	r = 'RunXML.in'
-	#gen_rand_query()
+	w = open("RunXML.in")
+	gen_query = gen_rand_query(random.randint(1, 10))
+	gen_data = gen_rand_data(random.randint(0,30), gen_query)
+	w.write(gen_data)
+	w.write(gen_query)
+	w.write("")
+	w.write(gen_data)
+	w.write(gen_query)
+	
 
 acceptance()
-gen_rand_pair()
-gen_rand_query(random.randint(1, 10))
