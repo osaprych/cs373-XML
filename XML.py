@@ -4,22 +4,22 @@ import xml.etree.ElementTree as ET
 
 id_counter = [1]
 query_counter = [0]	
-
+catch_id = []
 
 
 #----
 # xml_output
 #----
 
+def xml_output() :
+	print query_counter[0]
+	for element in catch_id :	
+		print element
+
 #extract first element of list
 
 #sort list
-"""
-except EndOfQuery :
-	query_counter[0] += 1
-	print "query_counter"
-	print query_counter
-"""
+
 #-----
 # query_search (recursive)
 #-----
@@ -27,29 +27,14 @@ except EndOfQuery :
 def query_search(data_root, query) :
 	for data_child in data_root :
 		if data_child.tag == query.tag :
-			#recurse down tree to find next query el
-			print "found query: ",
-			print query
-			print "at data element ",
-			print data_child
-			print "----"
-			query_counter[0] += 1
-			print "COUNTER ",
-			print query_counter[0]
-				
-			print "calling with query_check() ",
-			print data_child,
-			print query
-			query_check(data_child, query)
+			#recurse down tree to find next query element
+			return True
 		else :
 			#look for query in grandchildren
-			"""
-			print "calling with query_search() ",
-			print data_child,
-			print query
-			"""
 			query_search(data_child, query)
-	return True
+	#Never found match to query element	
+	return False
+
 
 #-----
 # query_check (recursive)
@@ -57,17 +42,18 @@ def query_search(data_root, query) :
 
 def query_check(data, query_root):
 	#Loop over query branch elements
-	#print "\n\nMade it to the query_check!!!\n"
-	#print "called with query_check() "
-	#print data,
-	#print list(query_root)
 	for query_child in query_root :
 		"""
 		print "query_check() searching new branch for :",
 		print query_child
 		print ""
 		"""
-		query_search(data, query_child)
+		#Returns a True for each query child found
+		b1 = query_search(data, query_child)
+		#If could not find query_child in parse of data xml, ret false 
+		if b1 == False :
+			return False
+
 		#if there are no query_children under a root
 			#query_counter[0] += 1
 		#if query_child == None :
@@ -90,15 +76,25 @@ def depth_search(parent, query_root) :
 
 		# PRINT CHILDREN WITH ID
 		print ""
-		print "Child ID dict entry:"
+		print "depth_search ID dict entry:"
 		print child.attrib	
 	
 		#Check for beginning of query pattern
 		#*****Query Kickoff*****
 		if (child.tag == query_root.tag) :
 			#print "Kicked off query_check!!!!!!!!!!!"
-			query_counter[0] += 1
-			query_check(child, query_root)
+			
+
+			b0 = query_check(child, query_root)
+			#*******			
+			if (b0) :
+				print "*****query_check returned true to depth_search"
+				query_counter[0] += 1
+				print "child.attrib ",
+				id_dict = child.attrib
+				id_val = id_dict[child.tag]
+				print id_val
+				catch_id.append(id_val)
 
 		depth_search (child, query_root)
 	return True
@@ -113,6 +109,7 @@ def xml_get_subelements(d, q) :
 	id_counter[0] += 1
 	#parse subtree
 	depth_search(d,q)
+	xml_output()
 
 #----------
 # xml_data_query
@@ -121,8 +118,9 @@ def xml_get_subelements(d, q) :
 def xml_data_query(xml_list) :
 	data = xml_list[0] # XML documents with exactly one root element 
 	query = xml_list[1] # XML documents as querying pattern with exactly one root element
-	print "PRINTING QUERY"
-	print list(query)
+	#print "PRINTING QUERY"
+	#print 
+
 
 	xml_get_subelements(data, query)
 
@@ -156,10 +154,10 @@ def xml_split_roots(s):
 
 def xml_read_file(r, a) :
 	#Open file
-	xml_file = open('RunXML_altered2.in')
+	#xml_file = open('RunXML_altered2.in')
 	#xml_file = open(r)
 	#Read entire file
-	xml_file_string = xml_file.read()
+	xml_file_string = r.read()
 	#Concatenation of void xml tags around entire input
 	xml_file_string = "<xml>" + xml_file_string + "</xml>"
 	#print xml_file_string
