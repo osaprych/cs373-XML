@@ -1,0 +1,77 @@
+commit eaf7fdc3f03c7125a880d3c1894444fc0d109060
+Author: Shaelyn-Watson <shaelynjoy@gmail.com>
+Date:   Sun Jun 23 14:48:35 2013 -0500
+
+    Query kickoff enabled and successful parsing of branches
+
+commit c2b5d465537588ecdd9ef9fbb335ae86e6d55bdb
+Author: Olga <osaprych@gmail.com>
+Date:   Fri Jun 21 13:52:34 2013 -0500
+
+    Assinged IDs to elements in data
+
+commit 1535e75f3c637f312aa5289e763a30946cad5e5a
+Author: Shaelyn-Watson <shaelynjoy@gmail.com>
+Date:   Fri Jun 21 12:36:44 2013 -0500
+
+    Can access all parts of query within the XML data
+
+commit a175601fd2cd19f9375fb4911b172785871d7444
+Author: Olga <osaprych@gmail.com>
+Date:   Thu Jun 20 15:54:10 2013 -0500
+
+    Up to looking for query pattern in data; should we use lists???
+
+commit efd799857cf0731dac22ca26a3369a4facfa206d
+Author: Shaelyn-Watson <shaelynjoy@gmail.com>
+Date:   Thu Jun 20 15:23:10 2013 -0500
+
+    Added split_roots unit test skeleton
+
+commit ed4394963fba6ea13c058584c53dcecf319a95dc
+Author: Shaelyn-Watson <shaelynjoy@gmail.com>
+Date:   Thu Jun 20 14:11:09 2013 -0500
+
+    Up to parsing the children from main root
+
+commit 3b5f7f598fff111fa69b1cbd10cb9ffd20fac519
+Author: Shaelyn-Watson <shaelynjoy@gmail.com>
+Date:   Wed Jun 19 14:23:42 2013 -0500
+
+    Reads in file as strings
+
+commit 4cb974806049a5959fb91a36487319924acd93c7
+Author: Olga <osaprych@gmail.com>
+Date:   Wed Jun 19 13:06:31 2013 -0500
+
+    First test that was working!
+
+commit 102ba2732640c821e53dc62b9f9d856c010fcc6f
+Author: Shaelyn-Watson <shaelynjoy@gmail.com>
+Date:   Wed Jun 19 12:24:35 2013 -0500
+
+    Dev first unit test
+
+commit 629038c212c038fa2f9030cebe5dde2b3a50a4b1
+Author: Shaelyn-Watson <shaelynjoy@gmail.com>
+Date:   Mon Jun 17 13:42:26 2013 -0500
+
+    Proposed read unit test
+
+commit 1d1bb716eed7ad0ba851b55c6e82f49d0bd40d3e
+Author: Shaelyn-Watson <shaelynjoy@gmail.com>
+Date:   Mon Jun 17 13:34:37 2013 -0500
+
+    Startup XML and TestXML
+
+commit 832f0a7653d666b07fed70d7ec4cd885d7acf35c
+Author: Shaelyn-Watson <shaelynjoy@gmail.com>
+Date:   Mon Jun 17 11:41:16 2013 -0500
+
+    Created skeleton RunXML to kickoff dev
+
+commit b496eb2ae2b918b1501d82b1619596ebcc4e78c7
+Author: osaprych <osaprych@gmail.com>
+Date:   Mon Jun 17 09:31:31 2013 -0700
+
+    Initial commit

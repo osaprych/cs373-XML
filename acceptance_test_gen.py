@@ -26,9 +26,9 @@ def gen_rand_data (size_data, query) :
 		size_data -= 1
 	data_and_dataclose = gen_rand_pair()
 	data = data_and_dataclose[0] + data + data_and_dataclose[1]
-	print "random data generated",
-	print data
-	print ""
+	#print "random data generated",
+	#print data
+	#print ""
 	return data
 
 
@@ -43,9 +43,9 @@ def gen_rand_query(size) :
 		size -= 1
 	i_and_j = gen_rand_pair()
 	query = i_and_j[0] + query + i_and_j[1]
-	print "random query generated",
-	print query
-	print ""
+	#print "random query generated",
+	#print query
+	#print ""
 	return query
 	
 def gen_rand_pair() :
@@ -53,7 +53,7 @@ def gen_rand_pair() :
 	i_and_j = []
 	i_and_j.append("<" + s + ">")
 	i_and_j.append("</" + s + ">")
-	print i_and_j
+	#print i_and_j
 	return i_and_j
 
 def get_rand_tag() :
@@ -69,14 +69,13 @@ def get_rand_tag() :
 	return random_tag
 
 def acceptance() :
-	w = open("RunXML.in")
-	gen_query = gen_rand_query(random.randint(1, 10))
-	gen_data = gen_rand_data(random.randint(0,30), gen_query)
-	w.write(gen_data)
-	w.write(gen_query)
-	w.write("")
-	w.write(gen_data)
-	w.write(gen_query)
+	i = 0
+	while i < 100 :
+		gen_query = gen_rand_query(random.randint(1, 10))
+		gen_data = gen_rand_data(random.randint(0,30), gen_query)
+		print gen_data
+		print gen_query
+		i += 1
 	
 
 acceptance()

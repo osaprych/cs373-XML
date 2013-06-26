@@ -7,6 +7,15 @@ query_counter = [0]
 catch_id = []
 
 
+def reset_globals() :
+	global id_counter
+	global query_counter
+	global catch_id
+	id_counter = [1]
+	query_counter = [0]
+	catch_id = []
+
+
 #----
 # xml_output
 #----
@@ -15,6 +24,8 @@ def xml_output() :
 	print query_counter[0]
 	for element in catch_id :	
 		print element
+	print ""
+	reset_globals()
 
 #extract first element of list
 
@@ -31,6 +42,12 @@ def query_search(data_root, query) :
 			return True
 		else :
 			#look for query in grandchildren
+			print "searching from ",
+			print data_child,
+			print "with root",
+			print data_root,
+			print "for ",
+			print query
 			query_search(data_child, query)
 	#Never found match to query element	
 	return False
@@ -63,6 +80,29 @@ def query_check(data, query_root):
 			
 
 
+#------
+# xml_det_kickoff
+#------
+
+def xml_det_kickoff(data, query) :
+	#Check for beginning of query pattern as parse data
+	#*****Query Kickoff*****
+	print "data",
+	print data
+	if (data.tag == query.tag) :
+		#If find query root check rest of query
+		b0 = query_check(data, query)
+		print "query_check returned ",
+		print b0
+		#If find complete query nested beneath data element
+		if (b0) :
+			query_counter[0] += 1
+                        id_dict = data.attrib
+                        id_val = id_dict[data.tag]
+                        catch_id.append(id_val)
+
+
+
 #----------
 # depth_search (recursive)
 #----------
@@ -72,32 +112,13 @@ def depth_search(parent, query_root) :
 	for child in parent :
 		#Assign ID to:element
 		child.set(child.tag, id_counter[0])
-		id_counter[0] += 1
-
-		# PRINT CHILDREN WITH ID
-		print ""
-		print "depth_search ID dict entry:"
-		print child.attrib	
+		id_counter[0] += 1	
 	
-		#Check for beginning of query pattern
-		#*****Query Kickoff*****
-		if (child.tag == query_root.tag) :
-			#print "Kicked off query_check!!!!!!!!!!!"
-			
-
-			b0 = query_check(child, query_root)
-			#*******			
-			if (b0) :
-				print "*****query_check returned true to depth_search"
-				query_counter[0] += 1
-				print "child.attrib ",
-				id_dict = child.attrib
-				id_val = id_dict[child.tag]
-				print id_val
-				catch_id.append(id_val)
+		#Check for query in data
+		xml_det_kickoff(child, query_root)
 
 		depth_search (child, query_root)
-	return True
+	return True 
 
 
 #----------
@@ -107,6 +128,9 @@ def depth_search(parent, query_root) :
 def xml_get_subelements(d, q) :
 	d.set(d.tag, id_counter[0])
 	id_counter[0] += 1
+	#Kickoff query from root of data
+	xml_det_kickoff(d, q)
+
 	#parse subtree
 	depth_search(d,q)
 	xml_output()
@@ -116,13 +140,22 @@ def xml_get_subelements(d, q) :
 #----------
 
 def xml_data_query(xml_list) :
-	data = xml_list[0] # XML documents with exactly one root element 
-	query = xml_list[1] # XML documents as querying pattern with exactly one root element
-	#print "PRINTING QUERY"
-	#print 
 
+	i = 0
+	j = 1
 
-	xml_get_subelements(data, query)
+	while j <= len(xml_list):
+		 # XML documents with exactly one root element 
+		data = xml_list[i] 
+		# XML documents as querying pattern with exactly one root element
+		query = xml_list[j]
+		#Iterate to next data/query child pair
+		i += 2
+		j += 2
+		
+		#Perform program function on the extracted
+		#data/query xml pair
+		xml_get_subelements(data, query)
 
 	return query
 
