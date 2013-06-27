@@ -182,7 +182,6 @@ def xml_read_file(r, a) :
 	xml_file_string = r.read()
 	#Concatenation of void xml tags around entire input
 	xml_file_string = "<xml>" + xml_file_string + "</xml>"
-	
 	assert len(xml_file_string) > 0
 
 	xml_split_roots(xml_file_string)
