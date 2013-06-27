@@ -18,7 +18,7 @@ To test the program:
 import StringIO
 import unittest
 
-from XML import xml_read_file, xml_split_roots, xml_data_query, xml_get_subelements, depth_search, xml_det_kickoff, query_check, xml_output
+from XML import xml_read_file, xml_split_roots, xml_data_query, xml_get_subelements, xml_depth_search, xml_det_kickoff, xml_query_check, xml_output
 
 # -----------
 # TestXML
@@ -42,6 +42,13 @@ class TestXML (unittest.TestCase) :
                 b = xml_read_file(r, a)
                 #Found length by printing from XML.py
                 self.assert_(len(b) == 269)
+
+	def test_read_file2(self):
+		r = open('RunXML_altered2.in')
+		a = 0
+		b = xml_read_file(r, a)
+		#Found length by printing from XML.py
+		self.assert_(len(b) == 836)   
  
 	#----
 	# xml_split_roots
@@ -63,6 +70,13 @@ class TestXML (unittest.TestCase) :
                 self.assert_(v[0].tag == "THU")
                 self.assert_(v[1].tag == "Team")
 
+	def test_split_roots2(self):
+		r = open("RunXML_altered2.in")
+		a = 0
+		b = xml_read_file(r, a)
+		v = xml_split_roots(b)
+		self.assert_(v[0].tag == "THU")
+		self.assert_(v[1].tag == "Team")
 
 	#-----
 	# xml_data_query
@@ -85,6 +99,15 @@ class TestXML (unittest.TestCase) :
                 v = xml_data_query(vv)
                 #Returns query root element
                 self.assert_(v.tag == "Team")
+
+	def test_data_query2 (self):
+		r = open("RunXML_altered2.in")
+                a = 0
+                b = xml_read_file(r, a)
+		vv = xml_split_roots(b)
+               	v = xml_data_query(vv)
+		#Returns query root element
+		self.assert_(v.tag == "Team")
 
 
 	#----
@@ -113,6 +136,16 @@ class TestXML (unittest.TestCase) :
                 #Returns true after the program has searched the tree
                 self.assert_(p == True)
 
+	def test_get_subelements2(self):
+		r = open("RunXML_altered2.in")
+                a = 0
+                b = xml_read_file(r, a)
+                vv = xml_split_roots(b)
+                d = vv[0]
+		q = vv[1]
+		p = xml_get_subelements(d, q)
+                #Returns true after the program has searched the tree
+                self.assert_(p == True)
 
 	#----
 	# depth_search (recursive function)
@@ -125,7 +158,7 @@ class TestXML (unittest.TestCase) :
                 vv = xml_split_roots(b)
                 d = vv[0]
                 q = vv[1]
-		p = depth_search(d, q)
+		p = xml_depth_search(d, q)
 		#Returns true if parses through children and grandchildren of parent
 		self.assert_(p == True)
 
@@ -136,10 +169,20 @@ class TestXML (unittest.TestCase) :
                 vv = xml_split_roots(b)
                 d = vv[0]
                 q = vv[1]
-                p = depth_search(d, q)
+                p = xml_depth_search(d, q)
                 #Returns true if parses through children and grandchildren of parent
                 self.assert_(p == True)
 
+	def test_depth_search2 (self) :
+                r = open("RunXML_altered2.in")
+                a = 0
+                b = xml_read_file(r, a)
+                vv = xml_split_roots(b)
+                d = vv[0]
+                q = vv[1]
+                p = xml_depth_search(d, q)
+                #Returns true if parses through children and grandchildren of parent
+                self.assert_(p == True)
 	
 	#----
 	# test_det_kickoff(self) :
@@ -153,7 +196,7 @@ class TestXML (unittest.TestCase) :
                 d = vv[0]
                 q = vv[1]
                 p = xml_det_kickoff(d, q)
-                #Returns true if d == q
+                #Returns data element of successful kickoff function
                 self.assert_(p == d)
 
 	def test_det_kickoff0 (self) :
@@ -164,7 +207,18 @@ class TestXML (unittest.TestCase) :
                 d = vv[0]
                 q = vv[1]
                 p = xml_det_kickoff(d, q)
-                #Returns true if d == q
+                #Returns data element of successful kickoff function
+                self.assert_(p == d)
+
+	def test_det_kickoff2 (self) :
+                r = open("RunXML_altered2.in")
+                a = 0
+                b = xml_read_file(r, a)
+                vv = xml_split_roots(b)
+                d = vv[0]
+                q = vv[1]
+                p = xml_det_kickoff(d, q)
+                #Returns data element of successful kickoff function
                 self.assert_(p == d)
 
 	#----
@@ -178,9 +232,9 @@ class TestXML (unittest.TestCase) :
                 vv = xml_split_roots(b)
                 d = vv[0]
                 q = vv[1]
-                p = query_check(d, q)
+                p = xml_query_check(d, q)
                 #Returns true if d == q
-                self.assert_(p == "finished")
+                self.assert_(p == "checked_query")
 
 	def test_query_check1 (self) :
                 r = open("RunXML_altered.in")
@@ -189,9 +243,9 @@ class TestXML (unittest.TestCase) :
                 vv = xml_split_roots(b)
                 d = vv[0]
                 q = vv[1]
-                p = query_check(d, q)
+                p = xml_query_check(d, q)
                 #Returns true if d == q
-                self.assert_(p == "finished")
+                self.assert_(p == "checked_query")
 
 	def test_query_check2 (self) :
                 r = open("RunXML_altered2.in")
@@ -200,9 +254,9 @@ class TestXML (unittest.TestCase) :
                 vv = xml_split_roots(b)
                 d = vv[0]
                 q = vv[1]
-                p = query_check(d, q)
+                p = xml_query_check(d, q)
                 #Returns true if d == q
-                self.assert_(p == "finished")
+                self.assert_(p == "checked_query")
 
 	def test_query_check3 (self) :
                 r = open("RunXML_altered3.in")
@@ -211,9 +265,9 @@ class TestXML (unittest.TestCase) :
                 vv = xml_split_roots(b)
                 d = vv[0]
                 q = vv[1]
-                p = query_check(d, q)
+                p = xml_query_check(d, q)
                 #Returns true if d == q
-                self.assert_(p == "finished")
+                self.assert_(p == "checked_query")
 
 	#---
 	# test_output

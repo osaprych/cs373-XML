@@ -33,10 +33,10 @@ def xml_output() :
 
 					
 #-----
-# query_check (recursive)
+# xml_query_check (recursive)
 #-----
 
-def query_check(data, query_root):
+def xml_query_check(data, query_root):
 	#Loop over query branch elements
 	for query_child in query_root :
 	            #Capture list returned by findall of all subelements of data
@@ -52,7 +52,7 @@ def query_check(data, query_root):
 	            else :
 		            #Check next layer of data subelements
 		            for dsl_ele in d_s_l :
-		                        query_check(dsl_ele, query_child)
+		                        xml_query_check(dsl_ele, query_child)
 		                        """
 		                        print "****query_search found ",
 		                        print query_child.tag,
@@ -74,7 +74,7 @@ def xml_det_kickoff(data, query) :
 		#If find query root check for the rest of query
 		global query_check_false
 		query_check_false = True
-		query_check(data, query)
+		xml_query_check(data, query)
 		#print "~~query_check returned ",
 		#print query_check_false
 		#If find complete query nested beneath data element
@@ -91,10 +91,10 @@ def xml_det_kickoff(data, query) :
 
 
 #----------
-# depth_search (recursive)
+# xml_depth_search (recursive)
 #----------
 
-def depth_search(parent, query_root) :
+def xml_depth_search(parent, query_root) :
 	#Outermost loop that tags IDs to elements of data tree
 	for child in parent :
 		#Assign ID to:element
@@ -104,7 +104,7 @@ def depth_search(parent, query_root) :
 		#Check for query in data
 		xml_det_kickoff(child, query_root)
 
-		depth_search (child, query_root)
+		xml_depth_search (child, query_root)
 	return True 
 
 
@@ -122,7 +122,7 @@ def xml_get_subelements(d, q) :
 	xml_det_kickoff(d, q)
 
 	#parse the rest of the data subtree
-	depth_search(d,q)
+	xml_depth_search(d,q)
 	#When finished parsing data, output findings
 	xml_output()
 	return True

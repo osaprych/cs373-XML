@@ -26,3 +26,32 @@
 		<Amber></Amber>
 	</Cooly>
 </Team>
+
+<THU>
+	<Team>
+		<ACRush></ACRush>
+		<Jelly></Jelly>
+		<Cooly></Cooly>
+		<Hello></Hello>
+	</Team>
+	<JiaJia>
+		<Team>
+			<Ahyangyi></Ahyangyi>
+			<Dragon></Dragon>
+			<Cooly><Amber></Amber></Cooly>
+		</Team>
+	</JiaJia>
+	<JaJa>
+		<Team>
+			<Ahyangyi></Ahyangyi>
+			<Dragon></Dragon>
+			<Cooly><Amber></Amber></Cooly>
+		</Team>
+	</JaJa> 
+</THU>
+<Team>
+	<Dragon></Dragon>
+	<Cooly>
+		<Amber></Amber>
+	</Cooly>
+</Team>
