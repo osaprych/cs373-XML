@@ -1,3 +1,57 @@
+commit b2a650710a533798ff3e8ab8fa59ed84a6630181
+Author: Olga <osaprych@gmail.com>
+Date:   Thu Jun 27 13:57:22 2013 -0500
+
+    Modified unit tests and refactored code
+
+commit 2b9468b1161a3a28add5fe8cb8b353fcd07e5047
+Author: Olga <osaprych@gmail.com>
+Date:   Thu Jun 27 12:52:55 2013 -0500
+
+    Added SphereXML.py that runs out of time when we submit it to Sphere
+
+commit a2eb7e0fdda00974e5c47e9797e9eb0aa042ad68
+Author: Shaelyn-Watson <shaelynjoy@gmail.com>
+Date:   Thu Jun 27 05:30:17 2013 -0500
+
+    Replaced a recursivefunction with findall() and added unit tests
+
+commit 9d3fcc60c33a73055ff066866dbfea103c823761
+Author: Shaelyn-Watson <shaelynjoy@gmail.com>
+Date:   Wed Jun 26 23:49:32 2013 -0500
+
+    Handling most cases and larger input file
+
+commit 0c33dd6abf8143b9a8db5fdeaaed1ecd0a019a01
+Author: Shaelyn-Watson <shaelynjoy@gmail.com>
+Date:   Wed Jun 26 12:44:22 2013 -0500
+
+    Working with a few special case bugs and needs to be able to read white spaces
+
+commit 9f9518d04c730a7e8446e50ae4f91a99fff3835e
+Author: Olga <osaprych@gmail.com>
+Date:   Tue Jun 25 17:40:57 2013 -0500
+
+    Almost writing new accept test file, about to code special cases
+
+commit 0d4a2dcfbed01a0bd1e0d62b3d0a1990b15a9a79
+Author: Olga <osaprych@gmail.com>
+Date:   Tue Jun 25 17:12:11 2013 -0500
+
+    Wrote acceptance test generator which generates query using random words from seuss.in
+
+commit b82d36cb5d51b035e870e328f8af1648be0d1ebf
+Author: Olga <osaprych@gmail.com>
+Date:   Tue Jun 25 15:25:23 2013 -0500
+
+    Working XML.py with single element tree and query acceptance test
+
+commit 920c1d4b5dbef085fa237de3de9344f8f290432b
+Author: Olga <osaprych@gmail.com>
+Date:   Mon Jun 24 14:13:14 2013 -0500
+
+    Succesfully search through elements in data, but need to make sure that the whole serach patter holds
+
 commit eaf7fdc3f03c7125a880d3c1894444fc0d109060
 Author: Shaelyn-Watson <shaelynjoy@gmail.com>
 Date:   Sun Jun 23 14:48:35 2013 -0500
