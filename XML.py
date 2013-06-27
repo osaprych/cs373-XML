@@ -2,6 +2,10 @@
 import xml.etree.ElementTree as ET
 import sys
 
+"""
+This program parses XML data query pairs to find the number of times and where query appears in data.
+"""
+
 id_counter = [1]
 query_counter = [0]	
 catch_id = []
@@ -9,6 +13,9 @@ query_check_false = True
 
 
 def reset_globals() :
+	"""
+	Start clean counter for new incoming data query pair.
+	"""
 	global id_counter
 	global query_counter
 	global catch_id
@@ -22,6 +29,9 @@ def reset_globals() :
 #----
 
 def xml_output() :
+	"""
+	Prints num occurances to first line of output and ID num of element that occurs the query pattern
+	"""
 	#Print num occurances to first line of output
 	print query_counter[0]
 	#ID num of element that occurs the query pattern
@@ -40,6 +50,9 @@ def xml_output() :
 #-----
 
 def xml_query_check(data, query_root):
+	"""
+	Depth First Search through query to find matching data elements and ensure that the entire query is present
+	"""
 	#Loop over query branch elements
 	for query_child in query_root :
 	            #Capture list returned by findall of all subelements of data
@@ -67,6 +80,9 @@ def xml_query_check(data, query_root):
 #------
 
 def xml_det_kickoff(data, query) :
+	"""
+	Check for beginning of query pattern as parse data, and if find query root check for the rest of query.
+	"""
 	#Check for beginning of query pattern as parse data
 	if (data.tag == query.tag) :
 
@@ -93,6 +109,9 @@ def xml_det_kickoff(data, query) :
 #----------
 
 def xml_depth_search(parent, query_root) :
+	"""
+	Parse and label all the elements in the subtree beneath given data parent
+	"""
 	#Outermost loop that tags IDs to elements of data tree
 	for child in parent :
 		#Assign ID to:element
@@ -112,6 +131,11 @@ def xml_depth_search(parent, query_root) :
 #----------
 
 def xml_get_subelements(d, q) :
+	"""
+	Assign ID to root of data, and check it against the query root. Call depth_search with root of data.
+	When that returns, it's known that the entire data tree was parsed.
+	At that point print output stored in global variables. 
+	"""
 	assert len(id_counter) > 0
 	#Assign ID to root of data subtree
 	d.set(d.tag, id_counter[0])
@@ -131,6 +155,9 @@ def xml_get_subelements(d, q) :
 #----------
 
 def xml_data_query(xml_list) :
+	"""
+	Iterate through data query pairs which may be multiple depending on the input file. 
+	"""
 
 	i = 0
 	j = 1
@@ -158,6 +185,9 @@ def xml_data_query(xml_list) :
 #----------
 
 def xml_split_roots(s):
+	"""
+	Make list of data and query root elements that are found when parsing string as an element tree.
+	"""
 	#Get root element of newly created tree
 	root_from_string = ET.fromstring(s)
 		
@@ -178,7 +208,10 @@ def xml_split_roots(s):
 #----------
 
 def xml_read_file(r, a) :
-        sys.setrecursionlimit(1000000)
+	"""
+	Reads given file into one string.
+	"""
+	sys.setrecursionlimit (1000000) 
 	#Read entire file
 	xml_file_string = r.read()
 	#Concatenation of void xml tags around entire input
