@@ -13,10 +13,4 @@
 		</Team>
 	</JiaJia>
 </THU>
-
-<THU>
-	<Dragon></Dragon>
-	<Cooly>
-		<Amber></Amber>
-	</Cooly>
-</THU>
+<Cooly><Amber></Amber></Cooly>

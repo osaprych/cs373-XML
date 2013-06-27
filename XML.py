@@ -5,6 +5,7 @@ import xml.etree.ElementTree as ET
 id_counter = [1]
 query_counter = [0]	
 catch_id = []
+query_check_false = True
 
 
 def reset_globals() :
@@ -28,24 +29,9 @@ def xml_output() :
 		print element
 	print ""
 	reset_globals()
+	return query_counter[0]
 
-
-#-----
-# query_search (recursive)
-#-----
-
-def query_search(data_root, query) :
-	for data_child in data_root :
-		if data_child.tag == query.tag :
-			#recurse down tree to find next query element
-			return True
-		else :
-			#look for query in grandchildren
-			query_search(data_child, query)
-	#Never found match to query element in subtree beneath data_root	
-	return False
-
-
+					
 #-----
 # query_check (recursive)
 #-----
@@ -53,15 +39,29 @@ def query_search(data_root, query) :
 def query_check(data, query_root):
 	#Loop over query branch elements
 	for query_child in query_root :
-		#Returns a True for each query child found
-		b1 = query_search(data, query_child)
-		#If could not find query_child in parse of data xml, ret false 
-		if b1 == False :
-			return False
-	#Found all subelements of the query in the subtree of data
-	return True
-			
+	            #Capture list returned by findall of all subelements of data
+	            d_s_l = data.findall(query_child.tag)
+	            
+	            #Query ele was not found in data children
+	            if len(d_s_l) == 0:
+		            global query_check_false
+		            query_check_false = False
 
+	
+	            #Else this particular query ele was found in data
+	            else :
+		            #Check next layer of data subelements
+		            for dsl_ele in d_s_l :
+		                        query_check(dsl_ele, query_child)
+		                        """
+		                        print "****query_search found ",
+		                        print query_child.tag,
+		                        print " within the subelements of "
+		                        print data.tag
+		                        """
+	return "finished"
+		                 
+		                        
 
 #------
 # xml_det_kickoff
@@ -70,16 +70,23 @@ def query_check(data, query_root):
 def xml_det_kickoff(data, query) :
 	#Check for beginning of query pattern as parse data
 	if (data.tag == query.tag) :
+		#print "Kickoff found match"
 		#If find query root check for the rest of query
-		b0 = query_check(data, query)
+		global query_check_false
+		query_check_false = True
+		query_check(data, query)
+		#print "~~query_check returned ",
+		#print query_check_false
 		#If find complete query nested beneath data element
-		if (b0) :
+		if (query_check_false != False) :
+			#print "!!!!!Found complete query!!!!!"
 			#Increment num complete queries found
 			query_counter[0] += 1
-                        id_dict = data.attrib
-                        id_val = id_dict[data.tag]
+			id_dict = data.attrib
+			id_val = id_dict[data.tag]
 			#Add kickoff id to list
-                        catch_id.append(id_val)
+			catch_id.append(id_val)
+	return data
 
 
 
@@ -101,6 +108,7 @@ def depth_search(parent, query_root) :
 	return True 
 
 
+
 #----------
 # xml_get_subelements
 #----------
@@ -109,6 +117,7 @@ def xml_get_subelements(d, q) :
 	#Assign ID to root of data subtree
 	d.set(d.tag, id_counter[0])
 	id_counter[0] += 1
+
 	#Check for query from root of data
 	xml_det_kickoff(d, q)
 
@@ -116,6 +125,7 @@ def xml_get_subelements(d, q) :
 	depth_search(d,q)
 	#When finished parsing data, output findings
 	xml_output()
+	return True
 
 #----------
 # xml_data_query
@@ -158,6 +168,9 @@ def xml_split_roots(s):
 		xml_children_list.append(xml_child)
 	
 	xml_data_query(xml_children_list)
+
+	assert len(xml_children_list) > 0	
+
 	return xml_children_list
 
 #----------
