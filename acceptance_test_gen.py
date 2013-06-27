@@ -18,17 +18,14 @@ def gen_rand_data (size_data, query) :
 	while size_data :
 		data_and_dataclose = gen_rand_pair()
 		if random.randint(1, 100) % 2 == 0 :
-			data = data_and_dataclose[0] + query + data_and_dataclose[1]
+			data = data_and_dataclose[0] + query + data + data_and_dataclose[1]
 		elif random.randint(1, 100) % 2 == 0 :
 			data = data + data_and_dataclose[0] + data_and_dataclose[1]
 		else :
-			data = query + data_and_dataclose[0] + data_and_dataclose[1]
+			data = data + query + data_and_dataclose[0] + data_and_dataclose[1]
 		size_data -= 1
 	data_and_dataclose = gen_rand_pair()
 	data = data_and_dataclose[0] + data + data_and_dataclose[1]
-	#print "random data generated",
-	#print data
-	#print ""
 	return data
 
 
@@ -70,11 +67,12 @@ def get_rand_tag() :
 
 def acceptance() :
 	i = 0
-	while i < 100 :
+	while i < 1000 :
 		gen_query = gen_rand_query(random.randint(1, 10))
-		gen_data = gen_rand_data(random.randint(0,30), gen_query)
+		gen_data = gen_rand_data(random.randint(10,50), gen_query)
 		print gen_data
 		print gen_query
+		print ""
 		i += 1
 	
 
