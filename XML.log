@@ -1,3 +1,21 @@
+commit 76df24bf9a625f29fe51aae4a505c387bde2a674
+Author: Shaelyn-Watson <shaelynjoy@gmail.com>
+Date:   Thu Jun 27 15:46:30 2013 -0500
+
+    Cleaned repo
+
+commit 13af0525b6f2e3237f684b628414940c9cd8cc9c
+Author: Olga <osaprych@gmail.com>
+Date:   Thu Jun 27 15:38:57 2013 -0500
+
+    Comleted unit test and created output file for it
+
+commit 68bb5b65017c23d57b49a417f747a2bcce5c1c64
+Author: Shaelyn-Watson <shaelynjoy@gmail.com>
+Date:   Thu Jun 27 14:25:49 2013 -0500
+
+    Added handwritten accept tests used throughout dev
+
 commit b2a650710a533798ff3e8ab8fa59ed84a6630181
 Author: Olga <osaprych@gmail.com>
 Date:   Thu Jun 27 13:57:22 2013 -0500
