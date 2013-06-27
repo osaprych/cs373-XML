@@ -7,7 +7,6 @@ query_counter = [0]
 catch_id = []
 query_check_false = True
 
-
 def reset_globals() :
 	global id_counter
 	global query_counter
@@ -29,6 +28,9 @@ def xml_output() :
 		print element
 	print ""
 	reset_globals()
+	assert id_counter == [1]
+	assert query_counter == [0]
+	assert catch_id == []
 	return query_counter[0]
 
 					
@@ -50,16 +52,12 @@ def xml_query_check(data, query_root):
 	
 	            #Else this particular query ele was found in data
 	            else :
-		            #Check next layer of data subelements
-		            for dsl_ele in d_s_l :
-		                        xml_query_check(dsl_ele, query_child)
-		                        """
-		                        print "****query_search found ",
-		                        print query_child.tag,
-		                        print " within the subelements of "
-		                        print data.tag
-		                        """
-	return "finished"
+			assert len(d_s_l) > 0
+			#Check next layer of data subelements
+			for dsl_ele in d_s_l :
+				xml_query_check(dsl_ele, query_child)
+
+	return "checked_query"
 		                 
 		                        
 
@@ -70,22 +68,21 @@ def xml_query_check(data, query_root):
 def xml_det_kickoff(data, query) :
 	#Check for beginning of query pattern as parse data
 	if (data.tag == query.tag) :
-		#print "Kickoff found match"
+
 		#If find query root check for the rest of query
 		global query_check_false
 		query_check_false = True
 		xml_query_check(data, query)
-		#print "~~query_check returned ",
-		#print query_check_false
+
 		#If find complete query nested beneath data element
 		if (query_check_false != False) :
-			#print "!!!!!Found complete query!!!!!"
 			#Increment num complete queries found
 			query_counter[0] += 1
 			id_dict = data.attrib
 			id_val = id_dict[data.tag]
 			#Add kickoff id to list
 			catch_id.append(id_val)
+			assert len(catch_id) > 0
 	return data
 
 
@@ -100,7 +97,7 @@ def xml_depth_search(parent, query_root) :
 		#Assign ID to:element
 		child.set(child.tag, id_counter[0])
 		id_counter[0] += 1	
-	
+		assert child.tag != None
 		#Check for query in data
 		xml_det_kickoff(child, query_root)
 
@@ -114,6 +111,7 @@ def xml_depth_search(parent, query_root) :
 #----------
 
 def xml_get_subelements(d, q) :
+	assert len(id_counter) > 0
 	#Assign ID to root of data subtree
 	d.set(d.tag, id_counter[0])
 	id_counter[0] += 1
@@ -144,7 +142,8 @@ def xml_data_query(xml_list) :
 		#Iterate to next data/query child pair
 		i += 2
 		j += 2
-		
+		assert type(data) is ET.Element
+		assert type(data) is ET.Element
 		#Perform program function on the extracted
 		#data/query xml pair
 		xml_get_subelements(data, query)
@@ -178,18 +177,16 @@ def xml_split_roots(s):
 #----------
 
 def xml_read_file(r, a) :
-	sys.setrecursionlimit (1000000) 
+        sys.setrecursionlimit(1000000)
 	#Read entire file
 	xml_file_string = r.read()
 	#Concatenation of void xml tags around entire input
 	xml_file_string = "<xml>" + xml_file_string + "</xml>"
-	
 	assert len(xml_file_string) > 0
 
 	xml_split_roots(xml_file_string)
 
 	return xml_file_string
-
 # -----
 # main
 # -----

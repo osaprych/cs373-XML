@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import xml.etree.ElementTree as ET
-
+import sys
 
 id_counter = [1]
 query_counter = [0]	
@@ -178,6 +178,7 @@ def xml_split_roots(s):
 #----------
 
 def xml_read_file(r, a) :
+        sys.setrecursionlimit(1000000)
 	#Read entire file
 	xml_file_string = r.read()
 	#Concatenation of void xml tags around entire input
